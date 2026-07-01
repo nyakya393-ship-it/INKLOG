@@ -2,256 +2,119 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InkLog</title>
-
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <div class="layout">
-
-        <!-- ===== サイドバー ===== -->
-
-        <aside class="sidebar">
-
-            <div class="logo">
-                <h1>🦑 InkLog</h1>
-                <p>Battle Tracker</p>
-            </div>
-
-            <nav class="menu">
-
-                <a class="active" href="#">
-                    <span>🏠</span>
-                    ホーム
-                </a>
-
-                <a href="#">
-                    <span>📝</span>
-                    戦績入力
-                </a>
-
-                <a href="#">
-                    <span>📋</span>
-                    戦績一覧
-                </a>
-
-                <a href="#">
-                    <span>📊</span>
-                    統計
-                </a>
-
-                <a href="#">
-                    <span>🔫</span>
-                    ブキ
-                </a>
-
-                <a href="#">
-                    <span>🗺️</span>
-                    ステージ
-                </a>
-
-                <a href="#">
-                    <span>⚙️</span>
-                    設定
-                </a>
-
-            </nav>
-
-        </aside>
-
-        <!-- ===== メイン ===== -->
-
-        <main class="main">
-
-            <!-- ヘッダー -->
-
-            <header class="header">
-
-                <div>
-                    <h2>InkLog Dashboard</h2>
-                    <p>Splatoon Battle Record</p>
-                </div>
-
-                <div class="header-icons">
-                    <button>🔍</button>
-                    <button>🔔</button>
-                    <button>👤</button>
-                </div>
-
-            </header>
-
-            <!-- ようこそ -->
-
-            <section class="welcome-card">
-
-                <h2>👋 おかえり！</h2>
-
-                <p>
-                    今日も最高のナワバリを塗りつくそう！
-                </p>
-
-            </section>
-
-            <!-- ダッシュボード -->
-
-            <section class="dashboard">
-
-                <div class="stat-card">
-
-                    <h3>試合数</h3>
-
-                    <div class="number">
-                        0
-                    </div>
-
-                </div>
-
-                <div class="stat-card">
-
-                    <h3>勝率</h3>
-
-                    <div class="number">
-                        --%
-                    </div>
-
-                </div>
-
-                <div class="stat-card">
-
-                    <h3>K/D</h3>
-
-                    <div class="number">
-                        --
-                    </div>
-
-                </div>
-
-                <div class="stat-card">
-
-                    <h3>使用ブキ</h3>
-
-                    <div class="number">
-                        ---
-                    </div>
-
-                </div>
-
-            </section>
-
-            <!-- クイックスタート -->
-
-            <section class="quick-action">
-
-                <h2>
-                    戦績を記録
-                </h2>
-
-                <p>
-                    まずは最初の1試合を保存してみましょう。
-                </p>
-
-                <button class="record-button">
-                    ＋ 戦績を記録する
-                </button>
-
-            </section>
-
-            <!-- 最近の戦績 -->
-
-            <section class="recent">
-
-                <h2>最近の戦績</h2>
-
-                <div class="empty">
-
-                    <div class="empty-icon">
-                        🦑
-                    </div>
-
-                    <h3>
-                        まだ戦績はありません
-                    </h3>
-
-                    <p>
-                        「戦績を記録する」から追加してみましょう。
-                    </p>
-
-                </div>
-
-            </section>
-
-        </main>
-
-    </div>
-
-    <script src="script.js"></script>
-
-</body>
-
-</html>
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
   <meta charset="UTF-8">
-  <title>戦績管理 v0.4.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InkLog</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-  戦績管理 v0.4.0
-</header>
+  <div class="layout">
 
-<main>
+    <!-- ===== サイドバー ===== -->
+    <aside class="sidebar">
 
-  <div class="card">
-    <h2>戦績入力</h2>
+      <div class="logo">
+        <h1>🦑 InkLog</h1>
+        <p>Battle Tracker</p>
+      </div>
 
-    <form id="battleForm">
-      <label>ルール</label><br>
-      <select id="rule">
-        <option>ナワバリ</option>
-        <option>ガチエリア</option>
-        <option>ガチヤグラ</option>
-        <option>ガチホコ</option>
-        <option>ガチアサリ</option>
-      </select>
+      <nav class="menu">
 
-      <br><br>
+        <a class="active" href="#"><span>🏠</span> ホーム</a>
+        <a href="#"><span>📝</span> 戦績入力</a>
+        <a href="#"><span>📋</span> 戦績一覧</a>
+        <a href="#"><span>📊</span> 統計</a>
+        <a href="#"><span>🔫</span> ブキ</a>
+        <a href="#"><span>🗺️</span> ステージ</a>
+        <a href="#"><span>⚙️</span> 設定</a>
 
-      <label>勝敗</label><br>
-      <select id="result">
-        <option value="win">勝ち</option>
-        <option value="lose">負け</option>
-      </select>
+      </nav>
 
-      <br><br>
+    </aside>
 
-      <label>メモ</label><br>
-      <input id="memo" type="text" placeholder="例：ホコ持ちミスった">
+    <!-- ===== メイン ===== -->
+    <main class="main">
 
-      <br><br>
+      <!-- ヘッダー -->
+      <header class="header">
 
-      <button type="submit">保存</button>
-    </form>
+        <div>
+          <h2>InkLog Dashboard</h2>
+          <p>Splatoon Battle Record</p>
+        </div>
+
+        <div class="header-icons">
+          <button>🔍</button>
+          <button>🔔</button>
+          <button>👤</button>
+        </div>
+
+      </header>
+
+      <!-- ようこそ -->
+      <section class="welcome-card">
+
+        <h2>👋 おかえり！</h2>
+
+        <p>今日も最高のナワバリを塗りつくそう！</p>
+
+      </section>
+
+      <!-- 戦績入力フォーム（追加ここ） -->
+      <section class="card">
+
+        <h2>戦績入力</h2>
+
+        <form id="battleForm">
+
+          <label>ルール</label><br>
+          <select id="rule">
+            <option value="ナワバリ">ナワバリ</option>
+            <option value="ガチエリア">ガチエリア</option>
+            <option value="ガチヤグラ">ガチヤグラ</option>
+            <option value="ガチホコ">ガチホコ</option>
+            <option value="ガチアサリ">ガチアサリ</option>
+          </select>
+
+          <br><br>
+
+          <label>結果</label><br>
+          <select id="result">
+            <option value="win">勝ち</option>
+            <option value="lose">負け</option>
+          </select>
+
+          <br><br>
+
+          <label>メモ</label><br>
+          <input id="memo" type="text" placeholder="例：ホコ持ちミスった">
+
+          <br><br>
+
+          <button type="submit">保存</button>
+
+        </form>
+
+      </section>
+
+      <!-- 戦績一覧 -->
+      <section class="card">
+
+        <h2>戦績一覧</h2>
+        <div id="list"></div>
+
+      </section>
+
+    </main>
+
   </div>
 
-  <div class="card">
-    <h2>戦績一覧</h2>
-    <div id="list"></div>
-  </div>
+  <!-- JS -->
+  <script src="app.js"></script>
 
-</main>
-
-<footer>
-  v0.4.0
-</footer>
-
-<script src="app.js"></script>
 </body>
+
 </html>
