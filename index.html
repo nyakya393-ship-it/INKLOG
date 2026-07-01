@@ -4,107 +4,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InkLog v2.1</title>
+  <title>InkLog v3</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-  InkLog v2.1
-</header>
+<div class="layout">
 
-<main>
+  <aside class="sidebar">
+    <h1>🦑 InkLog</h1>
+    <a class="active">Dashboard</a>
+  </aside>
 
-  <!-- ダッシュボード -->
-  <div class="dashboard">
+  <main class="main">
 
-    <div class="card stat">
-      <h3>総試合数</h3>
-      <div id="totalBattles">0</div>
+    <div class="top-stats">
+      <div class="stat-box"><div class="label">Total</div><div id="totalBattles">0</div></div>
+      <div class="stat-box"><div class="label">Win Rate</div><div id="winRate">0%</div></div>
+      <div class="stat-box"><div class="label">Wins</div><div id="wins">0</div></div>
+      <div class="stat-box"><div class="label">Loses</div><div id="loses">0</div></div>
+      <div class="stat-box"><div class="label">K/D</div><div id="kd">0</div></div>
     </div>
 
-    <div class="card stat">
-      <h3>勝率</h3>
-      <div id="winRate">0%</div>
-    </div>
+    <section class="panel">
+      <h2>Battle Input</h2>
 
-    <div class="card stat">
-      <h3>勝ち</h3>
-      <div id="wins">0</div>
-    </div>
+      <form id="battleForm">
 
-    <div class="card stat">
-      <h3>負け</h3>
-      <div id="loses">0</div>
-    </div>
+        <label>バトルの種類</label>
+        <select id="battleType">
+          <option value="regular">レギュラー</option>
+          <option value="bankara_challenge">バンカラ(チャレンジ)</option>
+          <option value="bankara_open">バンカラ(オープン)</option>
+          <option value="xmatch">Xマッチ</option>
+          <option value="fes_challenge">フェス(チャレンジ)</option>
+          <option value="fes_open">フェス(オープン)</option>
+          <option value="tricolor">トリカラ</option>
+          <option value="event">イベント</option>
+          <option value="private">プラベ</option>
+        </select>
 
-  </div>
+        <label>ルール</label>
+        <select id="rule">
+          <option value="turf_war">ナワバリ</option>
+          <option value="splat_zones">エリア</option>
+          <option value="tower_control">ヤグラ</option>
+          <option value="rainmaker">ホコ</option>
+          <option value="clam_blitz">アサリ</option>
+        </select>
 
-  <!-- 入力フォーム -->
-  <div class="card">
-    <h2>戦績入力</h2>
+        <label>ステージ</label>
+        <select id="stage"></select>
 
-    <form id="battleForm">
+        <label>武器</label>
+        <select id="weapon"></select>
 
-      <label>武器</label>
-      <select id="weapon"></select>
+        <label>勝敗</label>
+        <select id="result">
+          <option value="win">勝ち</option>
+          <option value="lose">負け</option>
+          <option value="disconnect">切断</option>
+          <option value="invalid">無効</option>
+        </select>
 
-      <br><br>
-      
-      <label>ルール</label>
-      <select id="rule">
-        <option>ナワバリ</option>
-        <option>ガチエリア</option>
-        <option>ガチヤグラ</option>
-        <option>ガチホコ</option>
-        <option>ガチアサリ</option>
-      </select>
+        <label>キル</label>
+        <input id="kill" type="number">
 
-      <label>勝敗</label>
-      <select id="result">
-        <option value="win">勝ち</option>
-        <option value="lose">負け</option>
-        <option value="disconnect">通信切断</option>
-        <option value="invalid">無効試合</option>
-      </select>
+        <label>アシスト</label>
+        <input id="assist" type="number">
 
-      <br><br>
-      
-      <label>キル</label>
-      <input id="kill" type="number">
+        <label>デス</label>
+        <input id="death" type="number">
 
-      <br><br>
-      
-      <label>デス</label>
-      <input id="death" type="number">
+        <label>塗り</label>
+        <input id="paint" type="number">
 
-      <br><br>
-      
-      <label>メモ</label>
-      <input id="memo" type="text">
+        <label>SP</label>
+        <input id="special" type="number">
 
-      <button type="submit">保存</button>
+        <label>メモ</label>
+        <input id="memo" type="text">
 
-    </form>
-  </div>
+        <button type="submit">保存</button>
 
-  <!-- グラフ -->
-  <div class="card">
-    <h2>勝率グラフ</h2>
-    <canvas id="winChart" width="300" height="300"></canvas>
-  </div>
+      </form>
+    </section>
 
-  <!-- 一覧 -->
-  <div class="card">
-    <h2>戦績一覧</h2>
-    <div id="list"></div>
-  </div>
+    <section class="panel">
+      <h2>Recent Battles</h2>
+      <div id="list"></div>
+    </section>
 
-</main>
+  </main>
 
-<!-- トースト -->
-<div id="toast">保存しました！</div>
+</div>
+
+<div id="toast">Saved</div>
 
 <script src="app.js"></script>
 
