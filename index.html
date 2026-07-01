@@ -4,133 +4,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InkLog v0.7.0</title>
+  <title>InkLog v0.7</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="layout">
+<div class="layout">
 
-    <!-- サイドバー -->
-    <aside class="sidebar">
-      <div class="logo">
-        <h1>🦑 InkLog</h1>
-        <p>Battle Tracker</p>
+  <aside class="sidebar">
+    <div class="logo">
+      <h1>🦑 InkLog</h1>
+      <p>Battle Tracker</p>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- 統計 -->
+    <section class="dashboard">
+
+      <div class="stat-card">
+        <h3>試合数</h3>
+        <div class="number" id="totalBattles">0</div>
       </div>
 
-      <nav class="menu">
-        <a class="active" href="#">🏠 ホーム</a>
-        <a href="#">📝 戦績入力</a>
-        <a href="#">📊 統計</a>
-      </nav>
-    </aside>
+      <div class="stat-card">
+        <h3>勝ち</h3>
+        <div class="number" id="winCount">0</div>
+      </div>
 
-    <!-- メイン -->
-    <main class="main">
+      <div class="stat-card">
+        <h3>負け</h3>
+        <div class="number" id="loseCount">0</div>
+      </div>
 
-      <header class="header">
-        <div>
-          <h2>InkLog Dashboard</h2>
-          <p>Splatoon Battle Record</p>
-        </div>
-      </header>
+      <div class="stat-card">
+        <h3>勝率</h3>
+        <div class="number" id="winRate">--%</div>
+      </div>
 
-      <!-- 統計 -->
-      <section class="dashboard">
+      <div class="stat-card">
+        <h3>平均K/D</h3>
+        <div class="number" id="kdRatio">--</div>
+      </div>
 
-        <div class="stat-card">
-          <h3>試合数</h3>
-          <div class="number" id="totalBattles">0</div>
-        </div>
+    </section>
 
-        <div class="stat-card">
-          <h3>勝ち</h3>
-          <div class="number" id="winCount">0</div>
-        </div>
+    <!-- 入力 -->
+    <section class="card">
 
-        <div class="stat-card">
-          <h3>負け</h3>
-          <div class="number" id="loseCount">0</div>
-        </div>
+      <h2>戦績入力</h2>
 
-        <div class="stat-card">
-          <h3>勝率</h3>
-          <div class="number" id="winRate">--%</div>
-        </div>
+      <form id="battleForm">
 
-        <div class="stat-card">
-          <h3>平均K/D</h3>
-          <div class="number" id="kdRatio">--</div>
-        </div>
+        <select id="rule">
+          <option>ナワバリ</option>
+          <option>ガチエリア</option>
+          <option>ガチヤグラ</option>
+          <option>ガチホコ</option>
+          <option>ガチアサリ</option>
+        </select>
 
-      </section>
+        <!-- ★ここが重要（4択） -->
+        <select id="result">
+          <option value="win">勝ち</option>
+          <option value="lose">負け</option>
+          <option value="disconnect">通信切断（負け）</option>
+          <option value="invalid">無効試合</option>
+        </select>
 
-      <!-- 入力 -->
-      <section class="card">
+        <input id="weapon" placeholder="武器">
+        <input id="kill" type="number" value="0" placeholder="キル">
+        <input id="death" type="number" value="0" placeholder="デス">
+        <input id="count" type="number" placeholder="カウント">
+        <input id="memo" placeholder="メモ">
 
-        <h2>戦績入力</h2>
+        <button type="submit">保存</button>
 
-        <form id="battleForm">
+      </form>
 
-          <select id="rule">
-            <option value="ナワバリ">ナワバリ</option>
-            <option value="ガチエリア">ガチエリア</option>
-            <option value="ガチヤグラ">ガチヤグラ</option>
-            <option value="ガチホコ">ガチホコ</option>
-            <option value="ガチアサリ">ガチアサリ</option>
-          </select>
+    </section>
 
-          <!-- 勝敗（修正版） -->
-          <select id="result">
-            <option value="win">勝ち</option>
-            <option value="lose">負け</option>
-            <option value="disconnect">通信切断（負け）</option>
-            <option value="invalid">無効試合</option>
-          </select>
+    <!-- 一覧 -->
+    <section class="card">
+      <h2>戦績一覧</h2>
+      <div id="list"></div>
+    </section>
 
-          <input id="weapon" placeholder="武器（例：スシ）">
+  </main>
 
-          <input id="kill" type="number" min="0" value="0" placeholder="キル">
-          <input id="death" type="number" min="0" value="0" placeholder="デス">
+</div>
 
-          <input id="count" type="number" placeholder="カウント">
-
-          <input id="memo" placeholder="メモ">
-
-          <label>
-            <input type="checkbox" id="disconnect">
-            通信切断フラグ
-          </label>
-
-          <label>
-            <input type="checkbox" id="invalid">
-            無効試合フラグ
-          </label>
-
-          <br><br>
-
-          <button type="submit">保存</button>
-
-        </form>
-
-      </section>
-
-      <!-- 一覧 -->
-      <section class="card">
-
-        <h2>戦績一覧</h2>
-        <div id="list"></div>
-
-      </section>
-
-    </main>
-
-  </div>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 
 </body>
-
 </html>
