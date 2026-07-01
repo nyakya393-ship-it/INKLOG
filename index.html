@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InkLog v0.5.0</title>
+  <title>InkLog v0.6.0</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -13,50 +13,31 @@
 
   <div class="layout">
 
-    <!-- ===== サイドバー ===== -->
+    <!-- サイドバー -->
     <aside class="sidebar">
-
       <div class="logo">
         <h1>🦑 InkLog</h1>
         <p>Battle Tracker</p>
       </div>
 
       <nav class="menu">
-        <a class="active" href="#"><span>🏠</span> ホーム</a>
-        <a href="#"><span>📝</span> 戦績入力</a>
-        <a href="#"><span>📋</span> 戦績一覧</a>
-        <a href="#"><span>📊</span> 統計</a>
-        <a href="#"><span>🔫</span> ブキ</a>
-        <a href="#"><span>🗺️</span> ステージ</a>
-        <a href="#"><span>⚙️</span> 設定</a>
+        <a class="active" href="#">🏠 ホーム</a>
+        <a href="#">📝 戦績入力</a>
+        <a href="#">📊 統計</a>
       </nav>
-
     </aside>
 
-    <!-- ===== メイン ===== -->
+    <!-- メイン -->
     <main class="main">
 
-      <!-- ヘッダー -->
       <header class="header">
         <div>
           <h2>InkLog Dashboard</h2>
           <p>Splatoon Battle Record</p>
         </div>
-
-        <div class="header-icons">
-          <button>🔍</button>
-          <button>🔔</button>
-          <button>👤</button>
-        </div>
       </header>
 
-      <!-- ようこそ -->
-      <section class="welcome-card">
-        <h2>👋 おかえり！</h2>
-        <p>今日も最高のナワバリを塗りつくそう！</p>
-      </section>
-
-      <!-- ===== 統計ダッシュボード（v0.5.0） ===== -->
+      <!-- 統計 -->
       <section class="dashboard">
 
         <div class="stat-card">
@@ -79,16 +60,20 @@
           <div class="number" id="winRate">--%</div>
         </div>
 
+        <div class="stat-card">
+          <h3>平均K/D</h3>
+          <div class="number" id="kdRatio">--</div>
+        </div>
+
       </section>
 
-      <!-- ===== 戦績入力 ===== -->
+      <!-- 入力 -->
       <section class="card">
 
         <h2>戦績入力</h2>
 
         <form id="battleForm">
 
-          <label>ルール</label><br>
           <select id="rule">
             <option value="ナワバリ">ナワバリ</option>
             <option value="ガチエリア">ガチエリア</option>
@@ -97,20 +82,15 @@
             <option value="ガチアサリ">ガチアサリ</option>
           </select>
 
-          <br><br>
-
-          <label>結果</label><br>
           <select id="result">
             <option value="win">勝ち</option>
             <option value="lose">負け</option>
           </select>
 
-          <br><br>
+          <input id="memo" placeholder="メモ">
 
-          <label>メモ</label><br>
-          <input id="memo" type="text" placeholder="例：ホコ持ちミスった">
-
-          <br><br>
+          <input id="kill" type="number" min="0" value="0" placeholder="キル">
+          <input id="death" type="number" min="0" value="0" placeholder="デス">
 
           <button type="submit">保存</button>
 
@@ -118,7 +98,7 @@
 
       </section>
 
-      <!-- ===== 戦績一覧 ===== -->
+      <!-- 一覧 -->
       <section class="card">
 
         <h2>戦績一覧</h2>
