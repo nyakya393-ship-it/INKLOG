@@ -1,8 +1,8 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
-// =====================
-// 武器（※必要ならフル版差し替えOK）
-// =====================
+/* =====================
+ 武器（最小安定版・ここは増やせる）
+===================== */
 const weapons = [
   // =====================
   // シューター
@@ -117,79 +117,97 @@ const weapons = [
   "オーダーワイパーレプリカ",
   "デンタルワイパーミント","デンタルワイパースミ"
 ];
-
-// =====================
-// ステージ（完全版）
-// =====================
+/* =====================
+ ステージ（完全版）
+===================== */
 const stages = [
-  "ユノハナ大渓谷","ゴンズイ地区","ヤガラ市場","マテガイ放水路",
-  "ナンプラー遺跡","ナメロウ金属","クサヤ温泉","タラポートショッピングパーク",
-  "ヒラメが丘団地","マサバ海峡大橋","キンメダイ美術館",
-  "マヒマヒリゾート＆スパ","海女美術大学","チョウザメ造船",
-  "ザトウマーケット","スメーシーワールド","コンブトラック",
-  "マンタマリア号","タカアシ経済特区","オヒョウ海運",
-  "バイガイ亭","ネギトロ炭鉱","カジキ空港",
-  "リュウグウターミナル","デカライン高架下"
+  "ユノハナ大渓谷",
+  "ゴンズイ地区",
+  "ヤガラ市場",
+  "マテガイ放水路",
+  "ナンプラー遺跡",
+  "ナメロウ金属",
+  "クサヤ温泉",
+  "タラポートショッピングパーク",
+  "ヒラメが丘団地",
+  "マサバ海峡大橋",
+  "キンメダイ美術館",
+  "マヒマヒリゾート＆スパ",
+  "海女美術大学",
+  "チョウザメ造船",
+  "ザトウマーケット",
+  "スメーシーワールド",
+  "コンブトラック",
+  "マンタマリア号",
+  "タカアシ経済特区",
+  "オヒョウ海運",
+  "バイガイ亭",
+  "ネギトロ炭鉱",
+  "カジキ空港",
+  "リュウグウターミナル",
+  "デカライン高架下"
 ];
 
-// =====================
-// 初期化
-// =====================
-document.addEventListener("DOMContentLoaded", () => {
+/* =====================
+ 初期化
+===================== */
+window.onload = () => {
 
   const weaponSel = document.getElementById("weapon");
   const stageSel = document.getElementById("stage");
 
-  // 武器
   weapons.forEach(w => {
     const o = document.createElement("option");
     o.textContent = w;
     weaponSel.appendChild(o);
   });
 
-  // ステージ
   stages.forEach(s => {
     const o = document.createElement("option");
     o.textContent = s;
     stageSel.appendChild(o);
   });
 
-  // 保存
-  document.getElementById("saveBtn").onclick = () => {
-
-    const data = {
-      battleType: battleType.value,
-      rule: rule.value,
-      stage: stage.value,
-      weapon: weapon.value,
-      result: result.value,
-      kill: Number(kill.value),
-      assist: Number(assist.value),
-      death: Number(death.value),
-      paint: Number(paint.value),
-      special: Number(special.value)
-    };
-
-    battles.push(data);
-    localStorage.setItem("battles", JSON.stringify(battles));
-
-    update();
-  };
+  document.getElementById("saveBtn").onclick = saveBattle;
 
   update();
-});
+};
 
-// =====================
-// 更新
-// =====================
+/* =====================
+ 保存（最重要・絶対安全）
+===================== */
+function saveBattle() {
+
+  const data = {
+    battleType: document.getElementById("battleType").value,
+    rule: document.getElementById("rule").value,
+    stage: document.getElementById("stage").value,
+    weapon: document.getElementById("weapon").value,
+    result: document.getElementById("result").value,
+    kill: Number(document.getElementById("kill").value || 0),
+    assist: Number(document.getElementById("assist").value || 0),
+    death: Number(document.getElementById("death").value || 0),
+    paint: Number(document.getElementById("paint").value || 0),
+    special: Number(document.getElementById("special").value || 0)
+  };
+
+  battles.push(data);
+  localStorage.setItem("battles", JSON.stringify(battles));
+
+  update();
+}
+
+/* =====================
+ 更新
+===================== */
 function update() {
   renderStats();
   renderList();
 }
 
-// =====================
-// 統計
-// =====================
+/* =====================
+ 統計
+===================== */
 function renderStats() {
 
   const wins = battles.filter(b => b.result === "win").length;
@@ -197,7 +215,6 @@ function renderStats() {
 
   const kills = battles.reduce((a,b)=>a+b.kill,0);
   const deaths = battles.reduce((a,b)=>a+b.death,0);
-
   const paint = battles.reduce((a,b)=>a+(b.paint||0),0);
 
   document.getElementById("total").textContent = battles.length;
@@ -214,9 +231,9 @@ function renderStats() {
     battles.length ? (paint/battles.length).toFixed(1) : "0";
 }
 
-// =====================
-// 一覧
-// =====================
+/* =====================
+ 一覧
+===================== */
 function renderList() {
 
   const list = document.getElementById("list");
