@@ -20,32 +20,23 @@
     負:<span id="loses"></span> |
     勝率:<span id="rate"></span> |
     K/D:<span id="kd"></span> |
-    平均塗り:<span id="avgPaint"></span> |
-    ランク:<span id="rank"></span>
+    平均塗り:<span id="avgPaint"></span>
   </div>
 </header>
 
-<section class="form">
+<!-- タブ -->
+<div class="tabs">
+  <button onclick="showTab('inputTab')">入力</button>
+  <button onclick="showTab('listTab')">戦績</button>
+  <button onclick="showTab('chartTab')">グラフ</button>
+  <button onclick="showTab('rankTab')">ランク</button>
+</div>
 
-  <select id="battleType">
-    <option>レギュラーマッチ</option>
-    <option>バンカラマッチ(チャレンジ)</option>
-    <option>バンカラマッチ(オープン)</option>
-    <option>Xマッチ</option>
-    <option>イベントマッチ</option>
-    <option>フェスマッチ(チャレンジ)</option>
-    <option>フェスマッチ(オープン)</option>
-    <option>トリカラバトル</option>
-    <option>プライベートマッチ</option>
-  </select>
+<!-- 入力 -->
+<section id="inputTab" class="tab active">
 
-  <select id="rule">
-    <option>ナワバリバトル</option>
-    <option>ガチエリア</option>
-    <option>ガチヤグラ</option>
-    <option>ガチホコ</option>
-    <option>ガチアサリ</option>
-  </select>
+  <select id="battleType"></select>
+  <select id="rule"></select>
 
   <select id="stage"></select>
   <select id="weapon"></select>
@@ -67,7 +58,20 @@
 
 </section>
 
-<section id="list"></section>
+<!-- 戦績 -->
+<section id="listTab" class="tab">
+  <div id="list"></div>
+</section>
+
+<!-- グラフ -->
+<section id="chartTab" class="tab">
+  <div id="chart"></div>
+</section>
+
+<!-- ランク -->
+<section id="rankTab" class="tab">
+  <div id="rankBig"></div>
+</section>
 
 <script src="app.js"></script>
 </body>
