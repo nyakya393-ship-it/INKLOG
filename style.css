@@ -6,22 +6,19 @@ body {
 }
 
 h1 {
-  font-weight: 700;
-  letter-spacing: 1px;
+  padding: 10px;
+  margin: 0;
   color: #22d3ee;
   text-shadow: 0 0 10px rgba(34,211,238,0.4);
-  margin: 0;
-  padding: 10px;
 }
 
 .stats {
   padding: 5px 10px;
-  font-weight: 600;
-  color: #a5f3fc;
   font-size: 12px;
+  color: #a5f3fc;
 }
 
-.filter, .form {
+.form {
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -31,9 +28,9 @@ h1 {
 select, input {
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid #1f2937;
   background: #111827;
   color: white;
+  border: 1px solid #1f2937;
 }
 
 button {
@@ -42,7 +39,6 @@ button {
   border: none;
   border-radius: 12px;
   font-weight: 700;
-  color: black;
 }
 
 .card {
@@ -51,9 +47,4 @@ button {
   margin: 8px;
   padding: 10px;
   border-radius: 10px;
-  transition: 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-2px);
 }
