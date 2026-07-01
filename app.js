@@ -259,3 +259,10 @@ function renderList() {
     list.appendChild(div);
   });
 }
+function deleteBattle(index) {
+
+  battles.splice(index, 1);
+  localStorage.setItem("battles", JSON.stringify(battles));
+
+  update();
+}
