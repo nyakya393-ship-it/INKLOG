@@ -36,8 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
       div.innerHTML = `
         <b>${b.rule}</b><br>
         結果：${b.result === "win" ? "勝ち" : "負け"}<br>
+        武器：${b.weapon || "未設定"}<br>
         キル：${b.kill} / デス：${b.death}<br>
+        カウント：${b.count ?? "-"}<br>
+        ${b.disconnect ? "⚠ 通信切断<br>" : ""}
+        ${b.invalid ? "⚠ 無効試合<br>" : ""}
         メモ：${b.memo || "なし"}<br><br>
+
         <button onclick="removeBattle(${i})">削除</button>
       `;
 
@@ -54,9 +59,13 @@ document.addEventListener("DOMContentLoaded", () => {
     battles.push({
       rule: document.getElementById("rule").value,
       result: document.getElementById("result").value,
-      memo: document.getElementById("memo").value,
+      weapon: document.getElementById("weapon").value,
       kill: Number(document.getElementById("kill").value),
-      death: Number(document.getElementById("death").value)
+      death: Number(document.getElementById("death").value),
+      count: Number(document.getElementById("count").value),
+      memo: document.getElementById("memo").value,
+      disconnect: document.getElementById("disconnect").checked,
+      invalid: document.getElementById("invalid").checked
     });
 
     localStorage.setItem("battles", JSON.stringify(battles));
@@ -66,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===== 削除 =====
-  window.removeBattle = function(index) {
+  window.removeBattle = function (index) {
     battles.splice(index, 1);
     localStorage.setItem("battles", JSON.stringify(battles));
     render();
