@@ -5,7 +5,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
-  // 表示
+  // ===== 統計更新（v0.5.0）=====
+  function updateStats() {
+    const total = battles.length;
+    const win = battles.filter(b => b.result === "win").length;
+    const lose = battles.filter(b => b.result === "lose").length;
+
+    const rate = total === 0 ? 0 : Math.round((win / total) * 100);
+
+    document.getElementById("totalBattles").textContent = total;
+    document.getElementById("winCount").textContent = win;
+    document.getElementById("loseCount").textContent = lose;
+    document.getElementById("winRate").textContent = rate + "%";
+  }
+
+  // ===== 表示 =====
   function render() {
     list.innerHTML = "";
 
@@ -22,9 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       list.appendChild(div);
     });
+
+    updateStats();
   }
 
-  // 保存
+  // ===== 保存 =====
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -41,8 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
     render();
   });
 
-  // 削除（グローバル化）
-  window.removeBattle = function(index) {
+  // ===== 削除 =====
+  window.removeBattle = function (index) {
     battles.splice(index, 1);
     localStorage.setItem("battles", JSON.stringify(battles));
     render();
