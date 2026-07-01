@@ -1,7 +1,7 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
 /* =====================
- 武器（軽量版・増やしてOK）
+ 武器（全部表示・固定）
 ===================== */
 const weapons = [
 
@@ -119,8 +119,9 @@ const weapons = [
 "デンタルワイパーミント","デンタルワイパースミ"
 
 ];
+
 /* =====================
- ステージ（完全）
+ ステージ（完全表示）
 ===================== */
 const stages = [
   "ユノハナ大渓谷","ゴンズイ地区","ヤガラ市場","マテガイ放水路",
@@ -138,45 +139,6 @@ const stages = [
 ===================== */
 window.onload = () => {
 
-  const weaponSel = document.getElementById("weapon");
-  const stageSel = document.getElementById("stage");
-
-  weapons.forEach(w => {
-    const o = document.createElement("option");
-    o.textContent = w;
-    weaponSel.appendChild(o);
-  });
-
-  stages.forEach(s => {
-    const o = document.createElement("option");
-    o.textContent = s;
-    stageSel.appendChild(o);
-  });
-
-  document.getElementById("saveBtn").onclick = saveBattle;
-
-  /* ⭐武器検索 */
-  const weaponSearch = document.getElementById("weaponSearch");
-
-  weaponSearch.addEventListener("input", () => {
-
-    const keyword = weaponSearch.value.toLowerCase();
-
-    const filtered = weapons.filter(w =>
-      w.toLowerCase().includes(keyword)
-    );
-
-    weaponSel.innerHTML = "";
-
-    filtered.forEach(w => {
-      const o = document.createElement("option");
-      o.textContent = w;
-      weaponSel.appendChild(o);
-    });
-  });
-
-  update();
-};
   const weaponSel = document.getElementById("weapon");
   const stageSel = document.getElementById("stage");
 
@@ -235,11 +197,9 @@ function update() {
 function renderStats() {
 
   const wins = battles.filter(b => b.result === "win").length;
-　const loses = battles.filter(b => b.result === "lose").length;
-　const disconnects = battles.filter(b => b.result === "disconnect").length;
-　const invalids = battles.filter(b => b.result === "invalid").length;
- 
- const kills = battles.reduce((a,b)=>a+b.kill,0);
+  const loses = battles.filter(b => b.result === "lose").length;
+
+  const kills = battles.reduce((a,b)=>a+b.kill,0);
   const deaths = battles.reduce((a,b)=>a+b.death,0);
   const paint = battles.reduce((a,b)=>a+(b.paint||0),0);
 
