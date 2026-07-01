@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
-  // ===== 統計更新（v0.5.0）=====
+  // ===== 統計更新 =====
   function updateStats() {
     const total = battles.length;
     const win = battles.filter(b => b.result === "win").length;
@@ -13,10 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const rate = total === 0 ? 0 : Math.round((win / total) * 100);
 
+    const totalKill = battles.reduce((sum, b) => sum + (b.kill || 0), 0);
+    const totalDeath = battles.reduce((sum, b) => sum + (b.death || 0), 0);
+
+    const kd = totalDeath === 0 ? totalKill : (totalKill / totalDeath).toFixed(2);
+
     document.getElementById("totalBattles").textContent = total;
     document.getElementById("winCount").textContent = win;
     document.getElementById("loseCount").textContent = lose;
     document.getElementById("winRate").textContent = rate + "%";
+    document.getElementById("kdRatio").textContent = kd;
   }
 
   // ===== 表示 =====
@@ -30,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       div.innerHTML = `
         <b>${b.rule}</b><br>
         結果：${b.result === "win" ? "勝ち" : "負け"}<br>
+        キル：${b.kill} / デス：${b.death}<br>
         メモ：${b.memo || "なし"}<br><br>
         <button onclick="removeBattle(${i})">削除</button>
       `;
@@ -44,13 +51,14 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const battle = {
+    battles.push({
       rule: document.getElementById("rule").value,
       result: document.getElementById("result").value,
-      memo: document.getElementById("memo").value
-    };
+      memo: document.getElementById("memo").value,
+      kill: Number(document.getElementById("kill").value),
+      death: Number(document.getElementById("death").value)
+    });
 
-    battles.push(battle);
     localStorage.setItem("battles", JSON.stringify(battles));
 
     form.reset();
@@ -58,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ===== 削除 =====
-  window.removeBattle = function (index) {
+  window.removeBattle = function(index) {
     battles.splice(index, 1);
     localStorage.setItem("battles", JSON.stringify(battles));
     render();
