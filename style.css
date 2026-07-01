@@ -1,18 +1,24 @@
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: "Rajdhani", "Noto Sans JP", sans-serif;
   background: #0b0f14;
-  color: white;
+  color: #e5e7eb;
 }
 
-header {
+h1 {
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #22d3ee;
+  text-shadow: 0 0 10px rgba(34,211,238,0.4);
+  margin: 0;
   padding: 10px;
-  background: #111827;
 }
 
 .stats {
+  padding: 5px 10px;
+  font-weight: 600;
+  color: #a5f3fc;
   font-size: 12px;
-  margin-top: 5px;
 }
 
 .filter, .form {
@@ -24,23 +30,30 @@ header {
 
 select, input {
   padding: 10px;
-  border: none;
-  border-radius: 8px;
-  background: #1f2937;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #111827;
   color: white;
 }
 
 button {
   padding: 12px;
-  background: #3b82f6;
+  background: linear-gradient(90deg,#22d3ee,#3b82f6);
   border: none;
-  color: white;
-  border-radius: 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  color: black;
 }
 
 .card {
   background: #111827;
+  border-left: 3px solid #22d3ee;
   margin: 8px;
   padding: 10px;
   border-radius: 10px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
 }
