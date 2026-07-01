@@ -13,18 +13,16 @@
   <h1>戦績ダッシュボード</h1>
 
   <div class="stats">
-    <div>試合 <span id="totalBattles">0</span></div>
-    <div>勝 <span id="wins">0</span></div>
-    <div>負 <span id="loses">0</span></div>
-    <div>勝率 <span id="winRate">0%</span></div>
-    <div>K/D <span id="kd">0</span></div>
-    <div>平均塗り <span id="avgPaint">0</span></div>
+    試合:<span id="total"></span> |
+    勝:<span id="wins"></span> |
+    負:<span id="loses"></span> |
+    勝率:<span id="rate"></span> |
+    K/D:<span id="kd"></span> |
+    平均塗り:<span id="avgPaint"></span>
   </div>
 </header>
 
-<!-- =====================
- フィルター
-===================== -->
+<!-- フィルター -->
 <section class="filter">
 
   <select id="filterRule">
@@ -40,17 +38,18 @@
 
 </section>
 
-<!-- =====================
- 入力フォーム（これが重要）
-===================== -->
+<!-- 入力 -->
 <section class="form">
 
   <select id="battleType">
     <option>レギュラーマッチ</option>
-    <option>バンカラ(チャレンジ)</option>
-    <option>バンカラ(オープン)</option>
+    <option>バンカラマッチ(チャレンジ)</option>
+    <option>バンカラマッチ(オープン)</option>
     <option>Xマッチ</option>
-    <option>フェスマッチ</option>
+    <option>イベントマッチ</option>
+    <option>フェスマッチ(チャレンジ)</option>
+    <option>フェスマッチ(オープン)</option>
+    <option>トリカラバトル</option>
     <option>プライベートマッチ</option>
   </select>
 
@@ -78,19 +77,13 @@
   <input id="paint" type="number" placeholder="塗りポイント">
   <input id="special" type="number" placeholder="スペシャル回数">
 
-  <textarea id="memo" placeholder="メモ"></textarea>
-
   <button id="saveBtn">保存</button>
 
 </section>
 
-<!-- =====================
- 表示
-===================== -->
-<section id="rank"></section>
+<!-- 一覧 -->
 <section id="list"></section>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
