@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InkLog</title>
+  <title>InkLog v0.5.0</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -22,7 +22,6 @@
       </div>
 
       <nav class="menu">
-
         <a class="active" href="#"><span>🏠</span> ホーム</a>
         <a href="#"><span>📝</span> 戦績入力</a>
         <a href="#"><span>📋</span> 戦績一覧</a>
@@ -30,7 +29,6 @@
         <a href="#"><span>🔫</span> ブキ</a>
         <a href="#"><span>🗺️</span> ステージ</a>
         <a href="#"><span>⚙️</span> 設定</a>
-
       </nav>
 
     </aside>
@@ -40,7 +38,6 @@
 
       <!-- ヘッダー -->
       <header class="header">
-
         <div>
           <h2>InkLog Dashboard</h2>
           <p>Splatoon Battle Record</p>
@@ -51,19 +48,40 @@
           <button>🔔</button>
           <button>👤</button>
         </div>
-
       </header>
 
       <!-- ようこそ -->
       <section class="welcome-card">
-
         <h2>👋 おかえり！</h2>
-
         <p>今日も最高のナワバリを塗りつくそう！</p>
+      </section>
+
+      <!-- ===== 統計ダッシュボード（v0.5.0） ===== -->
+      <section class="dashboard">
+
+        <div class="stat-card">
+          <h3>試合数</h3>
+          <div class="number" id="totalBattles">0</div>
+        </div>
+
+        <div class="stat-card">
+          <h3>勝ち</h3>
+          <div class="number" id="winCount">0</div>
+        </div>
+
+        <div class="stat-card">
+          <h3>負け</h3>
+          <div class="number" id="loseCount">0</div>
+        </div>
+
+        <div class="stat-card">
+          <h3>勝率</h3>
+          <div class="number" id="winRate">--%</div>
+        </div>
 
       </section>
 
-      <!-- 戦績入力フォーム（追加ここ） -->
+      <!-- ===== 戦績入力 ===== -->
       <section class="card">
 
         <h2>戦績入力</h2>
@@ -100,7 +118,7 @@
 
       </section>
 
-      <!-- 戦績一覧 -->
+      <!-- ===== 戦績一覧 ===== -->
       <section class="card">
 
         <h2>戦績一覧</h2>
@@ -112,7 +130,6 @@
 
   </div>
 
-  <!-- JS -->
   <script src="app.js"></script>
 
 </body>
