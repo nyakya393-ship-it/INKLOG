@@ -1,6 +1,8 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
-/* ★ここに前の「武器フル配列」を入れる */
+// =====================
+// 武器（※必要ならフル版差し替えOK）
+// =====================
 const weapons = [
   // =====================
   // シューター
@@ -116,17 +118,34 @@ const weapons = [
   "デンタルワイパーミント","デンタルワイパースミ"
 ];
 
+// =====================
+// ステージ（完全版）
+// =====================
 const stages = [
-  "ユノハナ大渓谷","ゴンスイ地区","ヤガラ市場","マテガイ放水路",
-  "ナンプラー遺跡","ナメロウ金属","クサヤ温泉","タラポート",
-  "ヒラメが丘団地","マサバ海峡大橋"
+  "ユノハナ大渓谷","ゴンズイ地区","ヤガラ市場","マテガイ放水路",
+  "ナンプラー遺跡","ナメロウ金属","クサヤ温泉","タラポートショッピングパーク",
+  "ヒラメが丘団地","マサバ海峡大橋","キンメダイ美術館",
+  "マヒマヒリゾート＆スパ","海女美術大学","チョウザメ造船",
+  "ザトウマーケット","スメーシーワールド","コンブトラック",
+  "マンタマリア号","タカアシ経済特区","オヒョウ海運",
+  "バイガイ亭","ネギトロ炭鉱","カジキ空港",
+  "リュウグウターミナル","デカライン高架下"
 ];
 
+// =====================
+// 初期化
+// =====================
 document.addEventListener("DOMContentLoaded", () => {
 
   const weaponSel = document.getElementById("weapon");
   const stageSel = document.getElementById("stage");
-  const list = document.getElementById("list");
+
+  // 武器
+  weapons.forEach(w => {
+    const o = document.createElement("option");
+    o.textContent = w;
+    weaponSel.appendChild(o);
+  });
 
   // ステージ
   stages.forEach(s => {
@@ -135,39 +154,23 @@ document.addEventListener("DOMContentLoaded", () => {
     stageSel.appendChild(o);
   });
 
-  // 武器検索
-  function renderWeapons(filter="") {
-    weaponSel.innerHTML = "";
-    weapons.filter(w => w.includes(filter)).forEach(w => {
-      const o = document.createElement("option");
-      o.textContent = w;
-      weaponSel.appendChild(o);
-    });
-  }
-
-  renderWeapons();
-
-  document.getElementById("weaponSearch").addEventListener("input", e => {
-    renderWeapons(e.target.value);
-  });
-
   // 保存
   document.getElementById("saveBtn").onclick = () => {
 
-    battles.push({
+    const data = {
       battleType: battleType.value,
       rule: rule.value,
-      stage: stageSel.value,
-      weapon: weaponSel.value,
+      stage: stage.value,
+      weapon: weapon.value,
       result: result.value,
-      kill: +kill.value,
-      assist: +assist.value,
-      death: +death.value,
-      paint: +paint.value,
-      special: +special.value,
-      memo: memo.value
-    });
+      kill: Number(kill.value),
+      assist: Number(assist.value),
+      death: Number(death.value),
+      paint: Number(paint.value),
+      special: Number(special.value)
+    };
 
+    battles.push(data);
     localStorage.setItem("battles", JSON.stringify(battles));
 
     update();
@@ -176,40 +179,51 @@ document.addEventListener("DOMContentLoaded", () => {
   update();
 });
 
+// =====================
+// 更新
+// =====================
 function update() {
   renderStats();
   renderList();
 }
 
+// =====================
+// 統計
+// =====================
 function renderStats() {
 
-  const wins = battles.filter(b => b.result==="win").length;
-  const loses = battles.filter(b => b.result==="lose").length;
+  const wins = battles.filter(b => b.result === "win").length;
+  const loses = battles.length - wins;
 
   const kills = battles.reduce((a,b)=>a+b.kill,0);
   const deaths = battles.reduce((a,b)=>a+b.death,0);
 
-  const totalPaint = battles.reduce((a,b)=>a+(b.paint||0),0);
-  const avgPaint = battles.length ? totalPaint / battles.length : 0;
+  const paint = battles.reduce((a,b)=>a+(b.paint||0),0);
 
-  totalBattles.textContent = battles.length;
-  winsEl.textContent = wins;
-  losesEl.textContent = loses;
+  document.getElementById("total").textContent = battles.length;
+  document.getElementById("wins").textContent = wins;
+  document.getElementById("loses").textContent = loses;
 
-  winRate.textContent =
-    battles.length ? Math.round((wins/(wins+loses))*100)+"%" : "0%";
+  document.getElementById("rate").textContent =
+    battles.length ? Math.round((wins/battles.length)*100) + "%" : "0%";
 
-  kd.textContent =
+  document.getElementById("kd").textContent =
     deaths ? (kills/deaths).toFixed(2) : kills;
 
-  avgPaintEl.textContent = avgPaint.toFixed(1);
+  document.getElementById("avgPaint").textContent =
+    battles.length ? (paint/battles.length).toFixed(1) : "0";
 }
 
+// =====================
+// 一覧
+// =====================
 function renderList() {
 
+  const list = document.getElementById("list");
   list.innerHTML = "";
 
   battles.slice().reverse().forEach(b => {
+
     const div = document.createElement("div");
     div.className = "card";
 
