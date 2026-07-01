@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: "Rajdhani", "Noto Sans JP", sans-serif;
+  font-family: "Rajdhani","Noto Sans JP",sans-serif;
   background: #0b0f14;
   color: #e5e7eb;
 }
@@ -9,7 +9,6 @@ h1 {
   padding: 10px;
   margin: 0;
   color: #22d3ee;
-  text-shadow: 0 0 10px rgba(34,211,238,0.4);
 }
 
 .stats {
@@ -18,43 +17,52 @@ h1 {
   color: #a5f3fc;
 }
 
-.form {
-  padding: 10px;
+.tabs {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  padding: 10px;
+  gap: 5px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  background: #111827;
+  color: white;
+  border: 1px solid #1f2937;
+  border-radius: 8px;
+}
+
+.tab {
+  display: none;
+  padding: 10px;
+}
+
+.tab.active {
+  display: block;
 }
 
 select, input {
+  width: 100%;
+  margin-bottom: 6px;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #111827;
   color: white;
   border: 1px solid #1f2937;
 }
 
 button {
+  width: 100%;
   padding: 12px;
   background: linear-gradient(90deg,#22d3ee,#3b82f6);
   border: none;
-  border-radius: 12px;
-  font-weight: 700;
+  border-radius: 10px;
 }
 
 .card {
   background: #111827;
   border-left: 3px solid #22d3ee;
-  margin: 8px;
+  margin: 8px 0;
   padding: 10px;
   border-radius: 10px;
-}
-
-/* 🏆 ランク表示 */
-#rank {
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: 8px;
-  background: #111827;
-  color: #22d3ee;
-  text-shadow: 0 0 8px rgba(34,211,238,0.5);
 }
