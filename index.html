@@ -193,3 +193,65 @@
 </body>
 
 </html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>戦績管理 v0.4.0</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  戦績管理 v0.4.0
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>戦績入力</h2>
+
+    <form id="battleForm">
+      <label>ルール</label><br>
+      <select id="rule">
+        <option>ナワバリ</option>
+        <option>ガチエリア</option>
+        <option>ガチヤグラ</option>
+        <option>ガチホコ</option>
+        <option>ガチアサリ</option>
+      </select>
+
+      <br><br>
+
+      <label>勝敗</label><br>
+      <select id="result">
+        <option value="win">勝ち</option>
+        <option value="lose">負け</option>
+      </select>
+
+      <br><br>
+
+      <label>メモ</label><br>
+      <input id="memo" type="text" placeholder="例：ホコ持ちミスった">
+
+      <br><br>
+
+      <button type="submit">保存</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>戦績一覧</h2>
+    <div id="list"></div>
+  </div>
+
+</main>
+
+<footer>
+  v0.4.0
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
