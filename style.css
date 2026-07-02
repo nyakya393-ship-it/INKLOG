@@ -85,3 +85,14 @@ button {
 .toast.show {
   opacity: 1;
 }
+
+.deleteBtn {
+  width: auto;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  background: #ef4444;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 12px;
+}
