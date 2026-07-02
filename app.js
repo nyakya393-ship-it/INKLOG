@@ -1,8 +1,28 @@
 let battles = JSON.parse(localStorage.getItem("battles")) || [];
 
 /* =====================
- 武器（完全版）
+ データ
 ===================== */
+const battleTypes = [
+  "レギュラーマッチ",
+  "バンカラマッチ(チャレンジ)",
+  "バンカラマッチ(オープン)",
+  "Xマッチ",
+  "イベントマッチ",
+  "フェスマッチ(チャレンジ)",
+  "フェスマッチ(オープン)",
+  "トリカラバトル",
+  "プライベートマッチ"
+];
+
+const rules = [
+  "ナワバリバトル",
+  "ガチエリア",
+  "ガチヤグラ",
+  "ガチホコ",
+  "ガチアサリ"
+];
+
 const weapons = [
 
 /* =====================
@@ -119,122 +139,148 @@ const weapons = [
 "デンタルワイパーミント","デンタルワイパースミ"
 
 ];
-
-/* =====================
- ステージ（完全版）
-===================== */
 const stages = [
-  "ユノハナ大渓谷","ゴンズイ地区","ヤガラ市場","マテガイ放水路",
-  "ナンプラー遺跡","ナメロウ金属","クサヤ温泉","タラポートショッピングパーク",
-  "ヒラメが丘団地","マサバ海峡大橋","キンメダイ美術館",
-  "マヒマヒリゾート＆スパ","海女美術大学","チョウザメ造船",
-  "ザトウマーケット","スメーシーワールド","コンブトラック",
-  "マンタマリア号","タカアシ経済特区","オヒョウ海運",
-  "バイガイ亭","ネギトロ炭鉱","カジキ空港",
-  "リュウグウターミナル","デカライン高架下"
+  "ユノハナ大渓谷",
+  "ゴンズイ地区",
+  "ヤガラ市場",
+  "マテガイ放水路",
+  "ナンプラー遺跡",
+  "ナメロウ金属",
+  "クサヤ温泉",
+  "タラポートショッピングパーク",
+  "ヒラメが丘団地",
+  "マサバ海峡大橋",
+  "キンメダイ美術館",
+  "マヒマヒリゾート＆スパ",
+  "海女美術大学",
+  "チョウザメ造船",
+  "ザトウマーケット",
+  "スメーシーワールド",
+  "コンブトラック",
+  "マンタマリア号",
+  "タカアシ経済特区",
+  "オヒョウ海運",
+  "バイガイ亭",
+  "ネギトロ炭鉱",
+  "カジキ空港",
+  "リュウグウターミナル",
+  "デカライン高架下"
 ];
 
 /* =====================
- 初期化（ここが重要）
+ タブ
+===================== */
+function showTab(id) {
+
+  document.querySelectorAll(".tab").forEach(t => {
+    t.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+}
+
+/* =====================
+ 初期化
 ===================== */
 window.addEventListener("DOMContentLoaded", () => {
 
-  const weaponSel = document.getElementById("weapon");
-  const stageSel = document.getElementById("stage");
+  fill("battleType", battleTypes);
+  fill("rule", rules);
+  fill("weapon", weapons);
+  fill("stage", stages);
 
-  if (!weaponSel || !stageSel) {
-    console.error("weapon or stage select not found");
-    return;
-  }
-
-  // 武器追加
-  weapons.forEach(w => {
-    const opt = document.createElement("option");
-    opt.value = w;
-    opt.textContent = w;
-    weaponSel.appendChild(opt);
-  });
-
-  // ステージ追加
-  stages.forEach(s => {
-    const opt = document.createElement("option");
-    opt.value = s;
-    opt.textContent = s;
-    stageSel.appendChild(opt);
-  });
-
-  // ボタン
-  const btn = document.getElementById("saveBtn");
-  if (btn) btn.addEventListener("click", saveBattle);
+  document.getElementById("saveBtn").onclick = saveBattle;
 
   update();
 });
+
+function fill(id, arr) {
+  const el = document.getElementById(id);
+  arr.forEach(v => {
+    const o = document.createElement("option");
+    o.value = v;
+    o.textContent = v;
+    el.appendChild(o);
+  });
+}
 
 /* =====================
  保存
 ===================== */
 function saveBattle() {
 
-  const data = {
-    battleType: document.getElementById("battleType")?.value || "",
-    rule: document.getElementById("rule")?.value || "",
-    stage: document.getElementById("stage")?.value || "",
-    weapon: document.getElementById("weapon")?.value || "",
-    result: document.getElementById("result")?.value || "",
-    kill: Number(document.getElementById("kill")?.value || 0),
-    assist: Number(document.getElementById("assist")?.value || 0),
-    death: Number(document.getElementById("death")?.value || 0),
-    paint: Number(document.getElementById("paint")?.value || 0),
-    special: Number(document.getElementById("special")?.value || 0)
-  };
+  battles.push({
+    battleType: v("battleType"),
+    rule: v("rule"),
+    stage: v("stage"),
+    weapon: v("weapon"),
+    result: v("result"),
+    kill: n("kill"),
+    assist: n("assist"),
+    death: n("death"),
+    paint: n("paint"),
+    special: n("special")
+  });
 
-  battles.push(data);
   localStorage.setItem("battles", JSON.stringify(battles));
-
   update();
+}
+
+function v(id) {
+  return document.getElementById(id)?.value || "";
+}
+
+function n(id) {
+  return Number(document.getElementById(id)?.value || 0);
 }
 
 /* =====================
  更新
 ===================== */
 function update() {
-  renderStats();
-  renderList();
+  stats();
+  list();
 }
 
 /* =====================
  統計
 ===================== */
-function renderStats() {
+function stats() {
 
   const wins = battles.filter(b => b.result === "win").length;
   const loses = battles.filter(b => b.result === "lose").length;
 
-  const kills = battles.reduce((a,b)=>a+(b.kill||0),0);
-  const deaths = battles.reduce((a,b)=>a+(b.death||0),0);
-  const paint = battles.reduce((a,b)=>a+(b.paint||0),0);
+  const kills = sum("kill");
+  const deaths = sum("death");
+  const paint = sum("paint");
 
-  const winRate = battles.length ? (wins / battles.length) * 100 : 0;
+  const rate = battles.length ? (wins / battles.length) * 100 : 0;
   const kd = deaths ? kills / deaths : kills;
 
-  document.getElementById("total").textContent = battles.length;
-  document.getElementById("wins").textContent = wins;
-  document.getElementById("loses").textContent = loses;
-  document.getElementById("rate").textContent = winRate.toFixed(1) + "%";
-  document.getElementById("kd").textContent = kd.toFixed(2);
-  document.getElementById("avgPaint").textContent =
-    battles.length ? (paint / battles.length).toFixed(1) : "0";
+  set("total", battles.length);
+  set("wins", wins);
+  set("loses", loses);
+  set("rate", rate.toFixed(1) + "%");
+  set("kd", kd.toFixed(2));
+  set("avgPaint", battles.length ? (paint / battles.length).toFixed(1) : 0);
+}
+
+function sum(key) {
+  return battles.reduce((a,b)=>a+(b[key]||0),0);
+}
+
+function set(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
 }
 
 /* =====================
  一覧
 ===================== */
-function renderList() {
+function list() {
 
-  const list = document.getElementById("list");
-  if (!list) return;
-
-  list.innerHTML = "";
+  const el = document.getElementById("list");
+  el.innerHTML = "";
 
   battles.slice().reverse().forEach((b,i) => {
 
@@ -246,20 +292,20 @@ function renderList() {
     div.innerHTML = `
       <b>${b.weapon}</b><br>
       ${b.stage}<br>
-      ${b.rule} / ${b.result}<br>
+      ${b.battleType} / ${b.rule} / ${b.result}<br>
       K:${b.kill} A:${b.assist} D:${b.death}<br>
       ${b.paint}p SP:${b.special}<br>
-      <button onclick="deleteBattle(${idx})">削除</button>
+      <button onclick="del(${idx})">削除</button>
     `;
 
-    list.appendChild(div);
+    el.appendChild(div);
   });
 }
 
 /* =====================
  削除
 ===================== */
-function deleteBattle(i) {
+function del(i) {
   battles.splice(i,1);
   localStorage.setItem("battles", JSON.stringify(battles));
   update();
