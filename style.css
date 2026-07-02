@@ -1,26 +1,23 @@
 body {
   margin: 0;
-  font-family: "Rajdhani","Noto Sans JP",sans-serif;
+  font-family: sans-serif;
   background: #0b0f14;
-  color: #e5e7eb;
+  color: white;
 }
 
 h1 {
-  padding: 10px;
-  margin: 0;
+  margin: 10px;
   color: #22d3ee;
 }
 
 .stats {
-  padding: 5px 10px;
   font-size: 12px;
+  padding: 5px 10px;
   color: #a5f3fc;
 }
 
 .tabs {
   display: flex;
-  padding: 10px;
-  gap: 5px;
 }
 
 .tabs button {
@@ -29,7 +26,6 @@ h1 {
   background: #111827;
   color: white;
   border: 1px solid #1f2937;
-  border-radius: 8px;
 }
 
 .tab {
@@ -43,9 +39,8 @@ h1 {
 
 select, input {
   width: 100%;
-  margin-bottom: 6px;
+  margin: 5px 0;
   padding: 10px;
-  border-radius: 8px;
   background: #111827;
   color: white;
   border: 1px solid #1f2937;
@@ -53,16 +48,14 @@ select, input {
 
 button {
   width: 100%;
-  padding: 12px;
-  background: linear-gradient(90deg,#22d3ee,#3b82f6);
+  padding: 10px;
+  background: #22d3ee;
   border: none;
-  border-radius: 10px;
 }
 
 .card {
   background: #111827;
-  border-left: 3px solid #22d3ee;
   margin: 8px 0;
   padding: 10px;
-  border-radius: 10px;
+  border-left: 3px solid #22d3ee;
 }
