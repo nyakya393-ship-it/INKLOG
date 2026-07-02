@@ -167,9 +167,8 @@ const stages = [
   "リュウグウターミナル",
   "デカライン高架下"
 ];
-
 /* =====================
- タブ
+ タブ切替
 ===================== */
 function showTab(id) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
@@ -185,8 +184,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   fill("battleType", battleTypes);
   fill("rule", rules);
-  fill("weapon", weapons);
   fill("stage", stages);
+  fill("weapon", weapons);
 
   document.getElementById("saveBtn").onclick = saveBattle;
 
@@ -195,6 +194,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function fill(id, arr) {
   const el = document.getElementById(id);
+
+  if (!el) {
+    console.error("missing select:", id);
+    return;
+  }
+
   arr.forEach(v => {
     const o = document.createElement("option");
     o.value = v;
@@ -233,7 +238,7 @@ function update() {
 }
 
 /* =====================
- 統計（タブ専用）
+ 統計（完全版）
 ===================== */
 function renderStats() {
 
