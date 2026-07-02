@@ -221,10 +221,10 @@ function saveBattle() {
 
   localStorage.setItem("battles", JSON.stringify(battles));
 
-  // ⭐保存成功報告
-  alert("保存できました");
+  // ⭐画面下に通知
+  showToast("保存できました");
 
-  // ⭐入力リセット
+  // 入力リセット
   document.getElementById("kill").value = "";
   document.getElementById("assist").value = "";
   document.getElementById("death").value = "";
@@ -233,7 +233,6 @@ function saveBattle() {
 
   update();
 }
-
 /* =====================
  削除（1件）
 ===================== */
@@ -331,3 +330,15 @@ function renderList() {
 function v(id){ return document.getElementById(id)?.value || ""; }
 function n(id){ return Number(document.getElementById(id)?.value || 0); }
 function sum(k){ return battles.reduce((a,b)=>a+(b[k]||0),0); }
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 1500);
+}
