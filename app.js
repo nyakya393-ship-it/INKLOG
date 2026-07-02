@@ -176,17 +176,32 @@ window.onload = () => {
  タブ
 ===================== */
 function setupTabs(){
+
   document.querySelectorAll(".tab").forEach(tab=>{
-    tab.onclick = () => {
+    tab.addEventListener("click", () => {
 
-      document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-      document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+      const target = tab.dataset.tab;
 
+      // タブ状態
+      document.querySelectorAll(".tab")
+        .forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
-      document.getElementById(tab.dataset.tab).classList.add("active");
 
-    };
+      // ページ切替
+      document.querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+      const targetPage = document.getElementById(target);
+      if(targetPage) targetPage.classList.add("active");
+
+      // ⭐重要：分析だけ再描画
+      if(target === "analysis"){
+        renderAnalysis();
+      }
+
+    });
   });
+
 }
 
 /* =====================
@@ -397,3 +412,17 @@ function avg(k){return battles.length?sum(k)/battles.length:0;}
 ===================== */
 function v(id){return document.getElementById(id)?.value||"";}
 function n(id){return Number(document.getElementById(id)?.value||0);}
+
+window.onload = () => {
+
+  fill("weapon", weapons);
+  fill("stage", stages);
+  fill("rule", rules);
+  fill("battleType", battleTypes);
+
+  setupTabs();
+
+  renderBattleList();
+  renderAnalysis();
+
+};
