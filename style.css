@@ -10,26 +10,33 @@ h1 {
   color: #38bdf8;
 }
 
-/* タブ */
-.tabs {
+/* タブバー */
+.tabbar {
   display: flex;
-  gap: 5px;
+  background: #111827;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.tabs button {
+.tabbar .tab {
   flex: 1;
   padding: 10px;
+  text-align: center;
+  cursor: pointer;
   background: #111827;
-  color: white;
-  border: none;
 }
 
-.tab {
+.tabbar .tab.active {
+  background: #22c55e;
+}
+
+/* ページ */
+.page {
   display: none;
   margin-top: 10px;
 }
 
-.tab.active {
+.page.active {
   display: block;
 }
 
